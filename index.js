@@ -4,7 +4,7 @@ httpRequest.onload = function () {
   if (httpRequest.readyState === XMLHttpRequest.DONE) {
     if (httpRequest.status === 200) {
       console.log(httpRequest.responseText);
-      console.log();
+      console.log("ticker: ", ticker, "ticker2: ", ticker2);
       var currentPrice = JSON.parse(httpRequest.responseText);
       $(".marketPrice").html(currentPrice.c);
     } else {
@@ -17,9 +17,19 @@ httpRequest.onerror = function () {
   console.log(httpRequest.statusText);
 };
 
+//need to make that URL pull for each one
+
+//need to make custom URL to grab value for one and pull in custom URL
+
+var ticker = "ESTC";
+
+var ticker2 = $(".name").length;
+
 httpRequest.open(
   "GET",
-  "https://finnhub.io/api/v1/quote?symbol=AAPL&token=bspk5a7rh5rehfh23jbg"
+  "https://finnhub.io/api/v1/quote?symbol=" +
+    ticker +
+    "&token=bspk5a7rh5rehfh23jbg"
 );
 httpRequest.send();
 
