@@ -1,3 +1,28 @@
+var httpRequest = new XMLHttpRequest();
+
+httpRequest.onload = function () {
+  if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    if (httpRequest.status === 200) {
+      console.log(httpRequest.responseText);
+      console.log();
+      var currentPrice = JSON.parse(httpRequest.responseText);
+      $(".marketPrice").html(currentPrice.c);
+    } else {
+      console.log(httpRequest.statusText);
+    }
+  }
+};
+
+httpRequest.onerror = function () {
+  console.log(httpRequest.statusText);
+};
+
+httpRequest.open(
+  "GET",
+  "https://finnhub.io/api/v1/quote?symbol=AAPL&token=bspk5a7rh5rehfh23jbg"
+);
+httpRequest.send();
+
 var updateMarketValue = function (ele) {
   var sharesOwned = parseFloat($(ele).find(".shares input").val());
   var marketPrice = parseFloat($(ele).find(".marketPrice input").val());
