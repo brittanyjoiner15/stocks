@@ -1,10 +1,13 @@
 var httpRequest = new XMLHttpRequest();
 
+var ticker2;
+
 httpRequest.onload = function () {
+  ticker2 = $(".name").text();
   if (httpRequest.readyState === XMLHttpRequest.DONE) {
     if (httpRequest.status === 200) {
       console.log(httpRequest.responseText);
-      console.log("ticker: ", ticker, "ticker2: ", ticker2);
+      console.log(ticker2);
       var currentPrice = JSON.parse(httpRequest.responseText);
       $(".marketPrice").html(currentPrice.c);
     } else {
@@ -17,18 +20,14 @@ httpRequest.onerror = function () {
   console.log(httpRequest.statusText);
 };
 
-//need to make that URL pull for each one
-
-//need to make custom URL to grab value for one and pull in custom URL
+//how come when i use ticker the API request works, but when i use ticker2 it doesnt?
 
 var ticker = "ESTC";
-
-var ticker2 = $(".name").length;
 
 httpRequest.open(
   "GET",
   "https://finnhub.io/api/v1/quote?symbol=" +
-    ticker +
+    ticker2 +
     "&token=bspk5a7rh5rehfh23jbg"
 );
 httpRequest.send();
